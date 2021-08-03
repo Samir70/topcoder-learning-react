@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import MineSiteInput from "./components/MineSiteInput";
-import Overview from "./components/OverView/overview";
+import MineSiteOverview from "./components/OverView/MineSiteOverview";
 
 import "./App.css";
 
@@ -16,7 +16,7 @@ function App() {
       <div className="app">
         <Switch>
           <Route path="/overview">
-            <Overview names={names} />
+            <MineSiteOverview names={names} />
           </Route>
           <Route path="/">
             <MineSiteInput names={names} update={setNames} />
