@@ -8,7 +8,8 @@ function MineSiteInput(props) {
   }
   return (
     <div className="mine-site-input">
-      Mine Site Input
+      <h1>Mine Site Input</h1>
+      <p>Enter the names of the different ores you have found.</p>
       {props.names.map((val, index) => (
         <div key={index}>
           <div>ore {index + 1}</div>
