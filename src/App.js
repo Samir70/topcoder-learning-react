@@ -15,6 +15,7 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
+          {/* only the first path is meaningful, anything else matches to '/' */}
           <Route path="/overview">
             <MineSiteOverview names={names} />
           </Route>

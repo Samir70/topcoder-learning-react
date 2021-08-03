@@ -10,6 +10,7 @@ function MineSiteOverview(props) {
                     <li key={i + 1}>{oreName}</li>
                 ))}
             </ul>
+            {/* The next button is not a given requirement, but seems useful :) */}
             <Link id="backToEdit" to={toObject}>Go back to editing ores</Link>
         </div>
     )
