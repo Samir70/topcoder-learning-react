@@ -23,7 +23,6 @@ function App() {
             <MineSiteInput names={names} update={setNames} />
           </Route>
         </Switch>
-        {/* <p>Names has length {names.length} and is {names.join(',')}</p> */}
       </div>
     </Router>
   );

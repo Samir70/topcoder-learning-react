@@ -35,7 +35,6 @@ function MineSiteInput(props) {
       ))}
       <button id="addMoreButton" onClick={() => props.update([...props.names, ""])}>Add another ore</button>
       <button id="doneButton" onClick={() => setToOverview(true)}>Submit your update</button>
-      {/* <Link id="doneLink" to={toObject}>Submit your update</Link> */}
       {goToOverview && <Redirect to={toObject} />}
     </div>
   );
