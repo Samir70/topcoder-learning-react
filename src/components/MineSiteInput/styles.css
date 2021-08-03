@@ -1,0 +1,8 @@
+.mine-site-input {
+  padding-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
