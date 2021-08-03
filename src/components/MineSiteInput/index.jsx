@@ -7,7 +7,7 @@ function MineSiteInput(props) {
     newNames[i] = event.target.value
     props.update([...newNames])
   }
-  const toObject = { pathname: '/overview', state: props.names }
+  const toObject = { pathname: '/overview', state: {names: props.names} }
 
   return (
     <div className="mine-site-input">
