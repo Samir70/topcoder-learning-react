@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import "./styles.css";
 
 function MineSiteInput(props) {
@@ -6,6 +7,8 @@ function MineSiteInput(props) {
     newNames[i] = event.target.value
     props.update([...newNames])
   }
+  const toObject = { pathname: '/overview', state: props.names }
+
   return (
     <div className="mine-site-input">
       <h1>Mine Site Input</h1>
@@ -16,14 +19,15 @@ function MineSiteInput(props) {
           <input
             type="text"
             value={val}
-            placeholder={`name of ore ${index+1}`}
+            placeholder={`name of ore ${index + 1}`}
             onChange={(e) => handleChange(index, e)}
             id={`ore${index + 1}`}
           />
         </div>
       ))}
       <button id="addMoreButton" onClick={() => props.update([...props.names, ""])}>Add another ore</button>
-    </div>  
+      <Link id="doneButton" to={toObject}>Submit your update</Link>
+    </div>
   );
 }
 
