@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
 import "./styles.css";
 
 function MineSiteInput(props) {
+  const [goToOverview, setToOverview] = new useState(false)
   const handleChange = (i, event) => {
     let newNames = [...props.names];
     newNames[i] = event.target.value
     props.update([...newNames])
   }
-  const toObject = { pathname: '/overview', state: {names: props.names} }
+  const toObject = { pathname: '/overview', state: { names: props.names } }
 
   return (
     <div className="mine-site-input">
@@ -26,7 +28,9 @@ function MineSiteInput(props) {
         </div>
       ))}
       <button id="addMoreButton" onClick={() => props.update([...props.names, ""])}>Add another ore</button>
-      <Link id="doneButton" to={toObject}>Submit your update</Link>
+      <button id="doneButton" onClick={() => setToOverview(true)}>Submit your update</button>
+      {/* <Link id="doneLink" to={toObject}>Submit your update</Link> */}
+      {goToOverview && <Redirect to={toObject} />}
     </div>
   );
 }

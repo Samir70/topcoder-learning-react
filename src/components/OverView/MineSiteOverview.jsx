@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 function MineSiteOverview(props) {
-    const toObject = {pathname:"/", state: {names: props.names}}
+    const toObject = {pathname:"/", state: {names: props.names, goToOverView:false}}
     return (
         <div>
             <h1>Mine Site Overview</h1>
