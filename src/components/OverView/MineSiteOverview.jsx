@@ -19,26 +19,20 @@ function TabPanel(props) {
 }
 
 function MineSiteOverview(props) {
-    const toObject = { pathname: "/", state: { names: props.names, goToOverView: false } }
+    const toObject = { pathname: "/", state: { oreList: props.oreList, goToOverView: false } }
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
     // Table need consists checkbox, Name, Value & Time to Mine columns
     const columns = [
+        { field: 'id', headerName: 'ID', width: 50 },
         { field: 'name', headerName: 'Name', width: 250 },
         { field: 'value', headerName: 'Value', width: 150 },
         { field: 'timeToMine', headerName: 'Time to Mine', width: 200 }
     ];
     // dummy table for initial test
-    const rows = [
-        { id: "1", name: "ore1", value: 10, timeToMine: 5 },
-        { id: "2", name: "ore2", value: 12, timeToMine: 3 },
-        { id: "3", name: "ore3", value: 14, timeToMine: 2 },
-        { id: "4", name: "ore4", value: 16, timeToMine: 8 },
-        { id: "5", name: "ore5", value: 18, timeToMine: 4 },
-        { id: "6", name: "ore6", value: 20, timeToMine: 6 },
-    ]
+    const rows = props.oreList.filter(ore => ore.name !== '')
     return (
         <div>
             <h1>Mine Site Overview</h1>
@@ -60,12 +54,6 @@ function MineSiteOverview(props) {
                     />
                 </div>
 
-
-                <ul>
-                    {props.names.map((oreName, i) => (
-                        <li key={i + 1}>{oreName}</li>
-                    ))}
-                </ul>
                 {/* The next button is not a given requirement, but seems useful :) */}
                 <Link id="backToEdit" to={toObject}>Go back to editing ores</Link>
             </TabPanel>
