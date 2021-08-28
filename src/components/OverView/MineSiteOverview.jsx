@@ -28,9 +28,9 @@ function TabPanel(props) {
     );
 }
 
-function tLineItem(item) {
+function tLineItem(item, key) {
     return (
-        <TimelineItem>
+        <TimelineItem key={key}>
             <TimelineSeparator>
                 <TimelineDot />
                 <TimelineConnector />
@@ -41,7 +41,7 @@ function tLineItem(item) {
 }
 
 function makeTimeLine(arr) {
-    return arr.map(a => tLineItem(a))
+    return arr.map((ore, i) => tLineItem(ore, i))
 }
 
 function MineSiteOverview(props) {
