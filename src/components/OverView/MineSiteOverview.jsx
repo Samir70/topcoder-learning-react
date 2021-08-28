@@ -28,6 +28,22 @@ function TabPanel(props) {
     );
 }
 
+function tLineItem(item) {
+    return (
+        <TimelineItem>
+            <TimelineSeparator>
+                <TimelineDot />
+                <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>{item}</TimelineContent>
+        </TimelineItem>
+    )
+}
+
+function makeTimeLine(arr) {
+    return arr.map(a => tLineItem(a))
+}
+
 function MineSiteOverview(props) {
     const toObject = { pathname: "/", state: { oreList: props.oreList, goToOverView: false } }
     const [value, setValue] = useState(0);
@@ -43,6 +59,7 @@ function MineSiteOverview(props) {
     ];
     // dummy table for initial test
     const rows = props.oreList.filter(ore => ore.name !== '')
+    const tLineItems = ['Eat', 'Code', 'Sleep']
     return (
         <div>
             <h1>Mine Site Overview</h1>
@@ -70,26 +87,7 @@ function MineSiteOverview(props) {
             </TabPanel>
             <TabPanel className="tabPanel" value={value} index={1}>
                 <Timeline>
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>Eat</TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>Code</TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                        </TimelineSeparator>
-                        <TimelineContent>Sleep</TimelineContent>
-                    </TimelineItem>
+                    {makeTimeLine(tLineItems)}
                 </Timeline>
                 <Link id="backToEdit" to={toObject}>Go back to editing ores</Link>
             </TabPanel>
