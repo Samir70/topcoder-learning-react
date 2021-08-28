@@ -7,8 +7,18 @@ import Box from "@material-ui/core/Box";
 // import DataGrid from "@material-ui/core/DataGrid";
 import { DataGrid } from '@material-ui/data-grid';
 
-// useful article
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+
+
+// useful articles
 // https://javascript.plainenglish.io/material-ui-tabs-ee580daa62de
+// https://material-ui.com/components/tables/#basic-table
+// https://material-ui.com/components/timeline/#basic-timeline  
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props; return (
@@ -21,7 +31,7 @@ function TabPanel(props) {
 function MineSiteOverview(props) {
     const toObject = { pathname: "/", state: { oreList: props.oreList, goToOverView: false } }
     const [value, setValue] = useState(0);
-    const handleChange = (event, newValue) => {
+    const handleTabChange = (event, newValue) => {
         setValue(newValue);
     };
     // Table need consists checkbox, Name, Value & Time to Mine columns
@@ -37,27 +47,50 @@ function MineSiteOverview(props) {
         <div>
             <h1>Mine Site Overview</h1>
             <AppBar position="static" style={{ width: 900, margin: 'auto' }}>
-                <Tabs value={value} onChange={handleChange}>
+                <Tabs value={value} onChange={handleTabChange}>
                     <Tab label="Table" id="tabTable" />
                     <Tab label="Timeline" id="tabCard" />
                 </Tabs>
             </AppBar>
-            <TabPanel class="tabPanel" value={value} index={0}>
+            <TabPanel className="tabPanel" value={value} index={0}>
                 <h2>Ores that were given</h2>
                 <div style={{ height: 400, width: 700, margin: 'auto' }}>
                     <DataGrid
                         rows={rows}
                         columns={columns}
                         pageSize={5}
+                        rowsPerPageOptions={[5]}
                         checkboxSelection
-                        disableSelectionOnClick
+                    // disableSelectionOnClick
                     />
                 </div>
 
                 {/* The next button is not a given requirement, but seems useful :) */}
                 <Link id="backToEdit" to={toObject}>Go back to editing ores</Link>
             </TabPanel>
-            <TabPanel class="tabPanel" value={value} index={1}>
+            <TabPanel className="tabPanel" value={value} index={1}>
+                <Timeline>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot />
+                            <TimelineConnector />
+                        </TimelineSeparator>
+                        <TimelineContent>Eat</TimelineContent>
+                    </TimelineItem>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot />
+                            <TimelineConnector />
+                        </TimelineSeparator>
+                        <TimelineContent>Code</TimelineContent>
+                    </TimelineItem>
+                    <TimelineItem>
+                        <TimelineSeparator>
+                            <TimelineDot />
+                        </TimelineSeparator>
+                        <TimelineContent>Sleep</TimelineContent>
+                    </TimelineItem>
+                </Timeline>
                 <Link id="backToEdit" to={toObject}>Go back to editing ores</Link>
             </TabPanel>
         </div>
