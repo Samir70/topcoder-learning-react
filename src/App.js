@@ -102,8 +102,8 @@ function App() {
       <h1>Mine Site Overview</h1>
       <AppBar position="static" style={{ width: 900, margin: 'auto' }}>
         <Tabs value={value} onChange={handleTabChange}>
-          <Tab label="Table" id="tabTable" />
-          <Tab label="Timeline" id="tabCard" disabled={tLineItems.length === 0} />
+          <Tab label="Table" id="tabTable" className="tabPanel" />
+          <Tab label="Timeline" id="tabCard" disabled={tLineItems.length === 0} className="tabPanel" />
         </Tabs>
       </AppBar>
       <TabPanel className="tabPanel" value={value} index={0}>
@@ -113,7 +113,7 @@ function App() {
             <Table className="oreTable" aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>select</TableCell>
+                  <TableCell>checkbox</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell align="right">Value</TableCell>
                   <TableCell align="right">Time To Mine</TableCell>
