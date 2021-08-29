@@ -83,7 +83,9 @@ function MineSiteOverview(props) {
                         onSelectionModelChange={
                             items => {
                                 setSelectedRows(items)
-                                setTLineItems(rows.filter(r => items.includes(r.id)))
+                                setTLineItems(
+                                    rows.filter(r => items.includes(r.id)).sort((a, b) => a.value === b.value ? b.timeToMine - a.timeToMine : b.value - a.value)
+                                )
                             }
                         }
                         selectionModel={selectedRows}
