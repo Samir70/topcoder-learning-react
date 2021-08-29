@@ -84,7 +84,7 @@ function App() {
       <AppBar position="static" style={{ width: 900, margin: 'auto' }}>
         <Tabs value={value} onChange={handleTabChange}>
           <Tab label="Table" id="tabTable" />
-          <Tab label="Timeline" id="tabCard" />
+          <Tab label="Timeline" id="tabCard" disabled={tLineItems.length === 0} />
         </Tabs>
       </AppBar>
       <TabPanel className="tabPanel" value={value} index={0}>
