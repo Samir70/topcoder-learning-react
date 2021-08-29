@@ -40,21 +40,21 @@ const columns = [
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props; return (
-      <div {...other}>
-          {value === index && <Box p={3}>{children}</Box>}
-      </div>
+    <div {...other}>
+      {value === index && <Box p={3}>{children}</Box>}
+    </div>
   );
 }
 
 function tLineItem(ore, i, len) {
   return (
-      <TimelineItem key={ore.id}>
-          <TimelineSeparator>
-              <TimelineDot />
-              {i < len - 1 && <TimelineConnector />}
-          </TimelineSeparator>
-          <TimelineContent>{ore.name}</TimelineContent>
-      </TimelineItem>
+    <TimelineItem key={ore.id}>
+      <TimelineSeparator>
+        <TimelineDot />
+        {i < len - 1 && <TimelineConnector />}
+      </TimelineSeparator>
+      <TimelineContent>{ore.name}</TimelineContent>
+    </TimelineItem>
   )
 }
 
@@ -64,7 +64,13 @@ function makeTimeLine(arr) {
 
 function App() {
   const [oreList, setOreList] = useState([
-    { id: "1", name: "", value: 0, timeToMine: 0 }
+    // { id: "1", name: "", value: 0, timeToMine: 0 }
+    { id:"1", name: "ore1", value: 10, timeToMine: 5 },
+    { id:"2", name: "ore2", value: 12, timeToMine: 3 },
+    { id:"3", name: "ore3", value: 14, timeToMine: 2 },
+    { id:"4", name: "ore4", value: 16, timeToMine: 8 },
+    { id:"5", name: "ore5", value: 18, timeToMine: 4 },
+    { id:"6", name: "ore6", value: 20, timeToMine: 6 }
   ]);
   const [value, setValue] = useState(0);
   const [tLineItems, setTLineItems] = useState([])
@@ -90,7 +96,7 @@ function App() {
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection
-            // disableSelectionOnClick
+            disableSelectionOnClick
             onSelectionModelChange={
               items => {
                 setSelectedRows(items)
