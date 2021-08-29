@@ -2,6 +2,11 @@ import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import "./styles.css";
 
+const testOres = [
+  'Acanthite', 'Bauxite', 'Bornite', 'Chalcocite', 'Chromite',
+  'Galena', 'Hermatite', 'Magnetite', 'Malachite', 'Molybdenite'
+]
+
 function MineSiteInput(props) {
   // used to decide wether to redirect
   const [goToOverview, setToOverview] = new useState(false)
@@ -18,7 +23,14 @@ function MineSiteInput(props) {
     }
     props.update([...newOreList])
   }
-  const newOreObject = { id: '' + (props.oreList.length+1), name: '', value: 0, timeToMine: 0 }
+  const useTestOres = () => {
+    props.update(testOres.map((ore, i) => {
+      return {
+        id:''+(i+1), name:ore, value:ore.charCodeAt(0), timeToMine: Math.floor(10 + Math.random() * 50)
+      }
+    }))
+  }
+  const newOreObject = { id: '' + (props.oreList.length + 1), name: '', value: 0, timeToMine: 0 }
 
   return (
     <div className="mine-site-input">
@@ -39,6 +51,7 @@ function MineSiteInput(props) {
       ))}
       <button id="addMoreButton" onClick={() => props.update([...props.oreList, newOreObject])}>Add another ore</button>
       <button id="doneButton" onClick={() => setToOverview(true)}>Submit your update</button>
+      <button id="testOresButton" onClick={useTestOres}>Use the test data</button>
       {goToOverview && <Redirect to={toObject} />}
     </div>
   );
