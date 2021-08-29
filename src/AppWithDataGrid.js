@@ -4,13 +4,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { DataGrid } from '@material-ui/data-grid';
 
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -37,12 +31,12 @@ const testOres = [
 })
 
 // Table need consists checkbox, Name, Value & Time to Mine columns
-// const columns = [
-//   { field: 'id', headerName: 'ID', width: 50 },
-//   { field: 'name', headerName: 'Name', width: 250, editable: true },
-//   { field: 'value', headerName: 'Value', width: 150, editable: true },
-//   { field: 'timeToMine', headerName: 'Time to Mine', width: 200, editable: true }
-// ];
+const columns = [
+  { field: 'id', headerName: 'ID', width: 50 },
+  { field: 'name', headerName: 'Name', width: 250, editable: true },
+  { field: 'value', headerName: 'Value', width: 150, editable: true },
+  { field: 'timeToMine', headerName: 'Time to Mine', width: 200, editable: true }
+];
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props; return (
@@ -71,32 +65,19 @@ function makeTimeLine(arr) {
 function App() {
   const [oreList, setOreList] = useState([
     // { id: "1", name: "", value: 0, timeToMine: 0 }
-    { id: "1", name: "ore1", value: 10, timeToMine: 5, selected:false },
-    { id: "2", name: "ore2", value: 12, timeToMine: 3, selected:false },
-    { id: "3", name: "ore3", value: 12, timeToMine: 2, selected:false },
-    { id: "4", name: "ore4", value: 16, timeToMine: 8, selected:false },
-    { id: "5", name: "ore5", value: 18, timeToMine: 4, selected:false },
-    { id: "6", name: "ore6", value: 20, timeToMine: 6, selected:false }
+    { id:"1", name: "ore1", value: 10, timeToMine: 5 },
+    { id:"2", name: "ore2", value: 12, timeToMine: 3 },
+    { id:"3", name: "ore3", value: 14, timeToMine: 2 },
+    { id:"4", name: "ore4", value: 16, timeToMine: 8 },
+    { id:"5", name: "ore5", value: 18, timeToMine: 4 },
+    { id:"6", name: "ore6", value: 20, timeToMine: 6 }
   ]);
   const [value, setValue] = useState(0);
   const [tLineItems, setTLineItems] = useState([])
-  const [selectedRows, setSelectedRows] = useState(new Set())
+  const [selectedRows, setSelectedRows] = useState([])
   const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
-  const handleSelect = (id) => {
-    let sRows = new Set([...selectedRows])
-    if (sRows.has(id)) {
-      sRows.delete(id)
-    } else {
-      sRows.add(id)
-    }
-    setSelectedRows(new Set([...sRows]))
-    setTLineItems(
-      oreList.filter(r => sRows.has(r.id)).sort((a, b) => a.value === b.value ? b.timeToMine - a.timeToMine : b.value - a.value)
-    )
-    // console.log({ id, selectedRows, sRows })
-  }
   return (
     <div className="app">
       <h1>Mine Site Overview</h1>
@@ -109,29 +90,7 @@ function App() {
       <TabPanel className="tabPanel" value={value} index={0}>
         <h2>Ores that were given</h2>
         <div style={{ height: 400, width: 700, margin: 'auto' }}>
-          <TableContainer component={Paper}>
-            <Table className="oreTable" aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>select</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Value</TableCell>
-                  <TableCell align="right">Time To Mine</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {oreList.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell><input type="checkbox" onChange={() => handleSelect(row.id)} checked={selectedRows.has(row.id)} /></TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell align="right">{row.value}</TableCell>
-                    <TableCell align="right">{row.timeToMine}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          {/* <DataGrid
+          <DataGrid
             rows={oreList.filter(ore => ore.name !== '')}
             columns={columns}
             pageSize={5}
@@ -147,7 +106,7 @@ function App() {
               }
             }
             selectionModel={selectedRows}
-          /> */}
+          />
         </div>
         <button id="testOresButton" onClick={() => setOreList(testOres)}>Use the test data</button>
       </TabPanel>
