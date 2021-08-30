@@ -111,7 +111,7 @@ function App() {
           <Tab label="Timeline" id="tabCard" disabled={tLineItems.length === 0} className="tabPanel" />
         </Tabs>
       </AppBar>
-      <TabPanel className="tabPanel" value={value} index={0}>
+      <TabPanel id="tabPanel" className="tabPanel" value={value} index={0}>
         <h2>Ores that were given</h2>
         <div style={{ height: 400, width: 700, margin: 'auto' }}>
           <TableContainer component={Paper}>
