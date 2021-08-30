@@ -3,6 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -105,12 +106,12 @@ function App() {
       </AppBar>
       {value === 0 && <Box className="tabPanel" value={value} index={0}>
         <h2>Ores that were given</h2>
-        <div style={{ height: 400, width: 700, margin: 'auto' }}>
+        <div style={{ width: 700, margin: 'auto' }}>
           <TableContainer component={Paper}>
             <Table className="oreTable" aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell><input type="checkbox" onChange={selectAll} checked={allSelected} /></TableCell>
+                  <TableCell><Checkbox onChange={selectAll} checked={allSelected} color="primary" /></TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell align="right">Value</TableCell>
                   <TableCell align="right">Time To Mine</TableCell>
@@ -119,7 +120,7 @@ function App() {
               <TableBody>
                 {oreList.map((row) => (
                   <TableRow key={row.id} onClick={() => handleSelect(row.id)}>
-                    <TableCell><input type="checkbox" onChange={() => handleSelect(row.id)} checked={selectedRows.has(row.id)} /></TableCell>
+                    <TableCell><Checkbox onChange={() => handleSelect(row.id)} checked={selectedRows.has(row.id)} color="primary" /></TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell align="right">{row.value}</TableCell>
                     <TableCell align="right">{row.timeToMine}</TableCell>
