@@ -36,14 +36,6 @@ const testOres = [
   }
 })
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props; return (
-    <div {...other}>
-      {value === index && <Box p={3}>{children}</Box>}
-    </div>
-  );
-}
-
 function tLineItem(ore, i, len) {
   return (
     <TimelineItem key={ore.id}>
@@ -63,12 +55,12 @@ function makeTimeLine(arr) {
 function App() {
   const [oreList, setOreList] = useState([
     // { id: "1", name: "", value: 0, timeToMine: 0 }
-    { id: "1", name: "ore1", value: 10, timeToMine: 5, selected:false },
-    { id: "2", name: "ore2", value: 12, timeToMine: 3, selected:false },
-    { id: "3", name: "ore3", value: 12, timeToMine: 2, selected:false },
-    { id: "4", name: "ore4", value: 16, timeToMine: 8, selected:false },
-    { id: "5", name: "ore5", value: 18, timeToMine: 4, selected:false },
-    { id: "6", name: "ore6", value: 20, timeToMine: 6, selected:false }
+    { id: "1", name: "ore1", value: 10, timeToMine: 5, selected: false },
+    { id: "2", name: "ore2", value: 12, timeToMine: 3, selected: false },
+    { id: "3", name: "ore3", value: 12, timeToMine: 2, selected: false },
+    { id: "4", name: "ore4", value: 16, timeToMine: 8, selected: false },
+    { id: "5", name: "ore5", value: 18, timeToMine: 4, selected: false },
+    { id: "6", name: "ore6", value: 20, timeToMine: 6, selected: false }
   ]);
   const [value, setValue] = useState(0);
   const [tLineItems, setTLineItems] = useState([])
@@ -93,9 +85,9 @@ function App() {
   const selectAll = () => {
     let sRows = new Set()
     if (!allSelected) {
-      for (let ore of oreList) {sRows.add(ore.id)}
+      for (let ore of oreList) { sRows.add(ore.id) }
     }
-    setOreList(oreList.map(ore => {return {...ore, selected:!allSelected}}))
+    setOreList(oreList.map(ore => { return { ...ore, selected: !allSelected } }))
     setAllSelected(!allSelected)
     setSelectedRows(sRows)
     setTLineItems(
@@ -107,11 +99,11 @@ function App() {
       <h1>Mine Site Overview</h1>
       <AppBar position="static" style={{ width: 900, margin: 'auto' }}>
         <Tabs value={value} onChange={handleTabChange}>
-          <Tab label="Table" id="tabTable" className="tabPanel" />
-          <Tab label="Timeline" id="tabCard" disabled={tLineItems.length === 0} className="tabPanel" />
+          <Tab label="Table" id="tabTable" />
+          <Tab label="Timeline" id="tabCard" disabled={tLineItems.length === 0} />
         </Tabs>
       </AppBar>
-      <TabPanel id="tabPanel" className="tabPanel" value={value} index={0}>
+      {value === 0 && <Box className="tabPanel" value={value} index={0}>
         <h2>Ores that were given</h2>
         <div style={{ height: 400, width: 700, margin: 'auto' }}>
           <TableContainer component={Paper}>
@@ -138,12 +130,12 @@ function App() {
           </TableContainer>
         </div>
         <button id="testOresButton" onClick={() => setOreList(testOres)}>Use the test data</button>
-      </TabPanel>
-      <TabPanel className="tabPanel" value={value} index={1}>
+      </Box>}
+      {value === 1 && <Box className="tabPanel" value={value} index={1}>
         <Timeline>
           {tLineItems.length ? makeTimeLine(tLineItems) : <p>No ores selected</p>}
         </Timeline>
-      </TabPanel>
+      </Box>}
     </div>
   );
 }
