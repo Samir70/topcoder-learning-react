@@ -36,14 +36,6 @@ const testOres = [
   }
 })
 
-// Table need consists checkbox, Name, Value & Time to Mine columns
-// const columns = [
-//   { field: 'id', headerName: 'ID', width: 50 },
-//   { field: 'name', headerName: 'Name', width: 250, editable: true },
-//   { field: 'value', headerName: 'Value', width: 150, editable: true },
-//   { field: 'timeToMine', headerName: 'Time to Mine', width: 200, editable: true }
-// ];
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props; return (
     <div {...other}>
@@ -144,23 +136,6 @@ function App() {
               </TableBody>
             </Table>
           </TableContainer>
-          {/* <DataGrid
-            rows={oreList.filter(ore => ore.name !== '')}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            onSelectionModelChange={
-              items => {
-                setSelectedRows(items)
-                setTLineItems(
-                  oreList.filter(r => items.includes(r.id)).sort((a, b) => a.value === b.value ? b.timeToMine - a.timeToMine : b.value - a.value)
-                )
-              }
-            }
-            selectionModel={selectedRows}
-          /> */}
         </div>
         <button id="testOresButton" onClick={() => setOreList(testOres)}>Use the test data</button>
       </TabPanel>
