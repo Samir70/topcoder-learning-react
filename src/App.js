@@ -81,6 +81,7 @@ function App() {
   const [value, setValue] = useState(0);
   const [tLineItems, setTLineItems] = useState([])
   const [selectedRows, setSelectedRows] = useState(new Set())
+  const [allSelected, setAllSelected] = useState(false)
   const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -96,6 +97,18 @@ function App() {
       oreList.filter(r => sRows.has(r.id)).sort((a, b) => a.value === b.value ? b.timeToMine - a.timeToMine : b.value - a.value)
     )
     // console.log({ id, selectedRows, sRows })
+  }
+  const selectAll = () => {
+    let sRows = new Set()
+    if (!allSelected) {
+      for (let ore of oreList) {sRows.add(ore.id)}
+    }
+    setOreList(oreList.map(ore => {return {...ore, selected:!allSelected}}))
+    setAllSelected(!allSelected)
+    setSelectedRows(sRows)
+    setTLineItems(
+      oreList.filter(r => sRows.has(r.id)).sort((a, b) => a.value === b.value ? b.timeToMine - a.timeToMine : b.value - a.value)
+    )
   }
   return (
     <div className="app">
@@ -113,7 +126,7 @@ function App() {
             <Table className="oreTable" aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>checkbox</TableCell>
+                  <TableCell><input type="checkbox" onChange={selectAll} checked={allSelected} /></TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell align="right">Value</TableCell>
                   <TableCell align="right">Time To Mine</TableCell>
@@ -121,7 +134,7 @@ function App() {
               </TableHead>
               <TableBody>
                 {oreList.map((row) => (
-                  <TableRow key={row.id}>
+                  <TableRow key={row.id} onClick={() => handleSelect(row.id)}>
                     <TableCell><input type="checkbox" onChange={() => handleSelect(row.id)} checked={selectedRows.has(row.id)} /></TableCell>
                     <TableCell>{row.name}</TableCell>
                     <TableCell align="right">{row.value}</TableCell>
