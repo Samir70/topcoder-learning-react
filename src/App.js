@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 import "./App.css";
 
@@ -11,6 +12,8 @@ import "./App.css";
 //   }
 // })
 
+const selectCounterValue = state => state.value
+
 function App() {
   const [oreList, setOreList] = useState([
     // { id: "1", name: "", value: 0, timeToMine: 0 }
@@ -21,9 +24,13 @@ function App() {
     { id: "5", name: "ore5", value: 18, timeToMine: 4, selected: false },
     { id: "6", name: "ore6", value: 20, timeToMine: 6, selected: false }
   ]);
+  const count = useSelector(selectCounterValue);
+  const dispatch = useDispatch();
   return (
     <div className="app">
       <h1>Starting mining part 3</h1>
+      <p>counter: {count}</p>
+      <button onClick={() => dispatch({type: 'counter/incrememnted'})}>Add one</button>
     </div>
   );
 }
