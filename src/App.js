@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import { AddMiningEntry, AddMiningPlan } from "./Redux/actions";
-import { getCurrentPlan } from "./Redux/selectors";
+import { AddMiningPlan } from "./Redux/actions";
+import { MiningProcess } from './components/MiningProcess';
 
 // const testOres = [
 //   'Acanthite', 'Bauxite', 'Bornite', 'Chalcocite', 'Chromite',
@@ -19,8 +19,6 @@ import { getCurrentPlan } from "./Redux/selectors";
 //     id: '' + (i + 1), name: ore, value: ore.charCodeAt(0), timeToMine: ore.length
 //   }
 // })
-
-const selectValue = state => state.value
 
 function App() {
   // const [oreList, setOreList] = useState([
@@ -34,16 +32,14 @@ function App() {
   // ]);
   const dispatch = useDispatch();
   dispatch(AddMiningPlan([]))
-  const mPlan = useSelector(getCurrentPlan)
-  const val = useSelector(selectValue)
+  
+  
   return (
     <Router>
       <div className="app">
         <Switch>
           <Route path="/process">
-            <h1>Starting mining part 3</h1>
-            <p>Mining Plan: {mPlan} with amount: {val}</p>
-            <button onClick={() => dispatch(AddMiningEntry(5, false))}>Add one</button>
+            <MiningProcess />
           </Route>
           <Route path="/">
             <Redirect to="/process" />
