@@ -1,5 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 import "./App.css";
 import { AddMiningEntry, AddMiningPlan } from "./Redux/actions";
@@ -31,11 +37,20 @@ function App() {
   const mPlan = useSelector(getCurrentPlan)
   const val = useSelector(selectValue)
   return (
-    <div className="app">
-      <h1>Starting mining part 3</h1>
-      <p>Mining Plan: {mPlan} with amount: {val}</p>
-      <button onClick={() => dispatch(AddMiningEntry(5, false))}>Add one</button>
-    </div>
+    <Router>
+      <div className="app">
+        <Switch>
+          <Route path="/process">
+            <h1>Starting mining part 3</h1>
+            <p>Mining Plan: {mPlan} with amount: {val}</p>
+            <button onClick={() => dispatch(AddMiningEntry(5, false))}>Add one</button>
+          </Route>
+          <Route path="/">
+            <Redirect to="/process" />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
