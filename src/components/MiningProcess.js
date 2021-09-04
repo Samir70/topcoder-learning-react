@@ -16,8 +16,10 @@ export const MiningProcess = (props) => {
     const [lastChecked, setLastChecked] = useState(false)
     const handleAddEntry = () => {
         dispatch(AddMiningEntry(Number(amountMined), lastChecked))
-        setAmountMined('')
-        setLastChecked(false)
+        if (lastChecked) {
+            setAmountMined('')
+            setLastChecked(false)
+        }
     }
     return (
         <div>
@@ -40,7 +42,7 @@ export const MiningProcess = (props) => {
                     checked={lastChecked}
                     color="primary"
                 />
-                <label>This is the last block</label>
+                <label for="lastBlock">This is the last block</label>
             </div>
         </div>
     )
