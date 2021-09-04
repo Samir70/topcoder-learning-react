@@ -34,7 +34,7 @@ export const GoToMiningProcessButton = () => {
                     color="primary"
                     disabled={noMoreOres}
                     onClick={() => setShouldRedirect(true)}
-                >Go To Mining Process Page</Button>
+                >Back To Mining Process</Button>
             }
         </div>
     )
