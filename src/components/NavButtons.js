@@ -29,7 +29,7 @@ export const GoToMiningProcessButton = () => {
         <div>
             {shouldRedirect ? <Redirect to="/process" /> :
                 <Button
-                    id="checkResults"
+                    id="backToProcess"
                     variant="contained"
                     color="primary"
                     disabled={noMoreOres}
