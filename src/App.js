@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,8 +30,7 @@ function App() {
   //   { id: "5", name: "ore5", value: 18, timeToMine: 4, selected: false },
   //   { id: "6", name: "ore6", value: 20, timeToMine: 6, selected: false }
   // ]);
-  const dispatch = useDispatch();
-  dispatch(AddMiningPlan([]))
+  useDispatch(AddMiningPlan([]))
   
   
   return (
