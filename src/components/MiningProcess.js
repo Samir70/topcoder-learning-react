@@ -42,7 +42,7 @@ export const MiningProcess = (props) => {
                     checked={lastChecked}
                     color="primary"
                 />
-                <label for="lastBlock">This is the last block</label>
+                <label htmlFor="lastBlock">This is the last block</label>
             </div>
         </div>
     )
