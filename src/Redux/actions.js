@@ -7,7 +7,7 @@ export const AddMiningPlan = plan => {
     })
     return {
         type: ADDMININGPLAN,
-        payload: plan.length === 0 ? dummyPlan : plan
+        payload: plan
     }
 }
 

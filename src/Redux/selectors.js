@@ -1,2 +1,3 @@
-export const getCurrentPlan = state => state.miningPlan[0].name
+export const getCurrentOreName = state => state.miningPlan[state.currentOre].name
+export const getCurrentOreAmount = state => state.miningPlan[state.currentOre].amount
 export const getResults = state => state.miningPlan
