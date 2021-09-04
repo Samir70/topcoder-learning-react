@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,7 +9,9 @@ import {
 
 import "./App.css";
 import { AddMiningPlan } from "./Redux/actions";
+import { checkIfLastOreFinished } from "./Redux/selectors";
 import { MiningProcess } from './components/MiningProcess';
+import { Results } from './components/Results';
 
 // const testOres = [
 //   'Acanthite', 'Bauxite', 'Bornite', 'Chalcocite', 'Chromite',
@@ -31,14 +33,17 @@ function App() {
   //   { id: "6", name: "ore6", value: 20, timeToMine: 6, selected: false }
   // ]);
   useDispatch(AddMiningPlan([]))
-  
+  const noMoreOres = useSelector(checkIfLastOreFinished)  
   
   return (
     <Router>
       <div className="app">
         <Switch>
           <Route path="/process">
-            <MiningProcess />
+            {noMoreOres ? <Redirect to="/results" /> : <MiningProcess />}
+          </Route>
+          <Route path="/results">
+            <Results />
           </Route>
           <Route path="/">
             <Redirect to="/process" />

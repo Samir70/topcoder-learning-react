@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AddMiningEntry } from "../Redux/actions";
 import { getCurrentOreName, getCurrentOreAmount } from "../Redux/selectors";
+import { GoToResultsButton } from './NavButtons';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export const MiningProcess = (props) => {
@@ -44,6 +45,7 @@ export const MiningProcess = (props) => {
                 />
                 <label htmlFor="lastBlock">This is the last block</label>
             </div>
+            <GoToResultsButton />
         </div>
     )
 }
