@@ -24,7 +24,7 @@ export const MiningProcess = (props) => {
     }
     return (
         <div>
-            <h1>Current mining plan: {oreName}</h1>
+            <h1>{oreName}</h1>
             <p>Mining entry for {oreName}: {oreAmount}</p>
             <div>
                 <input
