@@ -11,7 +11,7 @@ export const GoToResultsButton = () => {
         <div>
             {shouldRedirect ? <Redirect to="/results" /> :
                 <button
-                    id="checkResults"
+                    id="btnCheckResults"
                     // variant="contained"
                     // color="primary"
                     onClick={() => setShouldRedirect(true)}
