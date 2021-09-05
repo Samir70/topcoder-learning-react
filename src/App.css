@@ -3,4 +3,14 @@
   height: 100%;
 }
 
+table {
+  margin: 0 auto;
+  table-layout: auto;
+  width: 50%;
+  border: 1px solid blue
+}
+
+td {
+  border: 1px solid blue;
+}
 
