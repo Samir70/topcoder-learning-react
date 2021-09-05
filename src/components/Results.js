@@ -5,7 +5,12 @@ import { GoToMiningProcessButton } from './NavButtons';
 
 export const Results = () => {
     const miningPlan = useSelector(getResults);
-    const res = miningPlan.map((ore, i) => <tr key={i}><td>{ore.name}</td><td>{ore.amount}</td><td>??</td></tr>)
+    const res = miningPlan.map((ore, i) =>
+        <tr key={i}>
+            <td>{ore.name}</td>
+            <td>{ore.amount}</td>
+            <td>{ore.jobs}</td>
+        </tr>)
     return (
         <div>
             <h1>The Mining results</h1>
