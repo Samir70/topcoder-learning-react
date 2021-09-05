@@ -1,7 +1,9 @@
 import { ADDMININGENTRY, ADDMININGPLAN } from "./actions"
 
 const initialState = {
-    miningPlan: [{ name: 'noMiningPlan', amount: 0, jobs:0 }, { name: 'noOres', amount: 0, jobs:0 }],
+    miningPlan: ["ore1", "ore2", "ore3", "ore4", "ore5", "ore6"].map(ore => {
+        return {name:ore, amount:0, jobs:0}
+    }),
     currentOre: 0,
     finishedLastOre: false
 }
@@ -10,7 +12,7 @@ export const counterReducer = (state = initialState, action) => {
     // console.log('got action: ', action)
     switch (action.type) {
         case ADDMININGPLAN:
-            return { ...state, miningPlan: action.payload }
+            return { ...state, miningPlan: action.payload, currentOre: 0, finishedLastOre: false }
         case ADDMININGENTRY:
             let nextOre = action.payload.lastBlock ? state.currentOre + 1 : state.currentOre
             const noMoreOres = nextOre === state.miningPlan.length

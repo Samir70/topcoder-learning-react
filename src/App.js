@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
@@ -32,9 +32,21 @@ function App() {
   //   { id: "5", name: "ore5", value: 18, timeToMine: 4, selected: false },
   //   { id: "6", name: "ore6", value: 20, timeToMine: 6, selected: false }
   // ]);
-  useDispatch(AddMiningPlan([]))
-  const noMoreOres = useSelector(checkIfLastOreFinished)  
-  
+  const dispatch = useDispatch();
+  // dispatch(AddMiningPlan([]))
+  const noMoreOres = useSelector(checkIfLastOreFinished)
+  const [newOreList, setNewOreList] = useState('')
+  const handleNewOreList = (e) => {
+    setNewOreList(e.target.value)
+  }
+  const handleSetNewPlan = () => {
+    if (newOreList === '') {
+      dispatch(AddMiningPlan([]))
+    } else {
+      let list = newOreList.split(',').map(ore => ore.trim())
+      dispatch(AddMiningPlan(list))
+    }
+  }
   return (
     <Router>
       <div className="app">
@@ -49,6 +61,14 @@ function App() {
             <Redirect to="/process" />
           </Route>
         </Switch>
+        <p>If you want to start again, type in a comma seperated list of ores:</p>
+        <input
+          type="text"
+          value={newOreList}
+          placeholder="give comma seperated list of ores"
+          onChange={handleNewOreList}
+        />
+        <button onClick={handleSetNewPlan}>Set new mining plan</button>
       </div>
     </Router>
   );
