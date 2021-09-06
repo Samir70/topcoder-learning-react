@@ -18,3 +18,11 @@ export const AddMiningEntry = (amount, lastBlock) => {
         payload: {amount, lastBlock}
     }
 }
+
+export const SETLASTCHECKED = "SETLASTCHECKED"
+export const setLastChecked = (isSet) => {
+    return {
+        type: SETLASTCHECKED,
+        payload: isSet
+    }
+}

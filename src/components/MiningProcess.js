@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AddMiningEntry } from "../Redux/actions";
-import { getCurrentOreName, getCurrentOreAmount } from "../Redux/selectors";
+import { AddMiningEntry, setLastChecked } from "../Redux/actions";
+import { getCurrentOreName, getCurrentOreAmount, getLastChecked } from "../Redux/selectors";
 import { GoToResultsButton } from './NavButtons';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -13,7 +13,8 @@ export const MiningProcess = (props) => {
     const handleAmountChanged = event => {
         setAmountMined(event.target.value)
     }
-    const [lastChecked, setLastChecked] = useState(false)
+    // const [lastChecked, setLastChecked] = useState(false)
+    const lastChecked = useSelector(getLastChecked)
     const handleAddEntry = () => {
         dispatch(AddMiningEntry(Number(amountMined), lastChecked))
         setAmountMined(amountMined)
@@ -39,13 +40,13 @@ export const MiningProcess = (props) => {
             <div>
                 <Checkbox
                     id="lastBlock"
-                    onChange={() => setLastChecked(!lastChecked)}
+                    onChange={() => dispatch(setLastChecked(!lastChecked))}
                     checked={lastChecked}
                     color="primary"
                 />
                 <label htmlFor="lastBlock">This is the last block</label>
             </div>
-            <GoToResultsButton amount={amountMined} lastMined={lastChecked} />
+            <GoToResultsButton />
         </div>
     )
 }

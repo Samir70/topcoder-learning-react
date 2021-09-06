@@ -1,15 +1,16 @@
-import { ADDMININGENTRY, ADDMININGPLAN } from "./actions"
+import { ADDMININGENTRY, ADDMININGPLAN, SETLASTCHECKED } from "./actions"
 
 const initialState = {
     miningPlan: ["ore1", "ore2", "ore3", "ore4", "ore5", "ore6"].map(ore => {
-        return {name:ore, amount:0, jobs:0}
+        return { name: ore, amount: 0, jobs: 0 }
     }),
     currentOre: 0,
-    finishedLastOre: false
+    finishedLastOre: false,
+    lastChecked: false
 }
 
 export const counterReducer = (state = initialState, action) => {
-    // console.log('got action: ', action)
+    console.log('got action: ', action)
     switch (action.type) {
         case ADDMININGPLAN:
             return { ...state, miningPlan: action.payload, currentOre: 0, finishedLastOre: false }
@@ -25,6 +26,10 @@ export const counterReducer = (state = initialState, action) => {
                 currentOre: nextOre,
                 finishedLastOre: noMoreOres
             }
+        case SETLASTCHECKED: {
+            console.log({old: state.lastChecked, new: action.payload})
+            return { ...state, lastChecked: action.payload }
+        }
         default:
             return state
     }
