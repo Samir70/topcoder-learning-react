@@ -34,7 +34,7 @@ export const MiningProcess = (props) => {
                     placeholder="type amount mined"
                     onChange={handleAmountChanged}
                 />
-                <button id="btnAddEntry" disabled={amountMined <= 0} onClick={handleAddEntry}>Add Entry</button>
+                <button id="btnAddEntry" disabled={amountMined <= 0 && amountMined !== '0'} onClick={handleAddEntry}>Add Entry</button>
             </div>
             <div>
                 <Checkbox
@@ -45,7 +45,7 @@ export const MiningProcess = (props) => {
                 />
                 <label htmlFor="lastBlock">This is the last block</label>
             </div>
-            <GoToResultsButton />
+            <GoToResultsButton amount={amountMined} lastMined={lastChecked} />
         </div>
     )
 }

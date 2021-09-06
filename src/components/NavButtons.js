@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import { checkIfLastOreFinished } from '../Redux/selectors';
+import { AddMiningEntry } from '../Redux/actions';
 
-export const GoToResultsButton = () => {
-    // const handleGoToResults = ;
+export const GoToResultsButton = (props) => {
+    const dispatch = useDispatch();
     const [shouldRedirect, setShouldRedirect] = useState(false)
+    const handleClick = () => {
+        let amount = Number(props.amount)
+        if (isNaN(amount)) {amount = 0}
+        dispatch(AddMiningEntry(amount, props.lastMined))
+        setShouldRedirect(true)
+    }
     return (
         <div>
             {shouldRedirect ? <Redirect to="/results" /> :
@@ -14,7 +21,7 @@ export const GoToResultsButton = () => {
                     id="btnCheckResults"
                     // variant="contained"
                     // color="primary"
-                    onClick={() => setShouldRedirect(true)}
+                    onClick={handleClick}
                 >Check Results</button>
             }
         </div>
