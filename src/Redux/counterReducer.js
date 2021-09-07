@@ -30,7 +30,6 @@ export const counterReducer = (state = initialState, action) => {
                 amountMined: action.payload.lastBlock ? '' : state.amountMined
             }
         case SETLASTCHECKED: {
-            // console.log({ old: state.lastChecked, new: action.payload })
             return { ...state, lastChecked: action.payload }
         }
         case SETAMOUNTMINED: {

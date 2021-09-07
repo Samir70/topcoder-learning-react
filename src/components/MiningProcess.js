@@ -10,12 +10,9 @@ export const MiningProcess = (props) => {
     const oreName = useSelector(getCurrentOreName);
     const oreAmount = useSelector(getCurrentOreAmount);
     const amountMined = useSelector(getAmountMined);
-    // const [amountMined, setAmountMined] = useState('')
     const handleAmountChanged = event => {
         dispatch(setAmountMined(event.target.value))
-        // setAmountMined(event.target.value)
     }
-    // const [lastChecked, setLastChecked] = useState(false)
     const lastChecked = useSelector(getLastChecked)
     const handleAddEntry = () => {
         dispatch(AddMiningEntry(Number(amountMined), lastChecked))
