@@ -1,4 +1,4 @@
-import { ADDMININGENTRY, ADDMININGPLAN, SETLASTCHECKED } from "./actions"
+import { ADDMININGENTRY, ADDMININGPLAN, SETLASTCHECKED, SETAMOUNTMINED } from "./actions"
 
 const initialState = {
     miningPlan: ["ore1", "ore2", "ore3", "ore4", "ore5", "ore6"].map(ore => {
@@ -6,14 +6,15 @@ const initialState = {
     }),
     currentOre: 0,
     finishedLastOre: false,
-    lastChecked: false
+    lastChecked: false,
+    amountMined: ''
 }
 
 export const counterReducer = (state = initialState, action) => {
     console.log('got action: ', action)
     switch (action.type) {
         case ADDMININGPLAN:
-            return { ...state, miningPlan: action.payload, currentOre: 0, finishedLastOre: false }
+            return { ...initialState, miningPlan: action.payload }
         case ADDMININGENTRY:
             let nextOre = action.payload.lastBlock ? state.currentOre + 1 : state.currentOre
             const noMoreOres = nextOre === state.miningPlan.length
@@ -25,11 +26,15 @@ export const counterReducer = (state = initialState, action) => {
                 miningPlan: newPlan,
                 currentOre: nextOre,
                 finishedLastOre: noMoreOres,
-                lastChecked: false
+                lastChecked: false,
+                amountMined: action.payload.lastBlock ? '' : state.amountMined
             }
         case SETLASTCHECKED: {
-            console.log({old: state.lastChecked, new: action.payload})
+            // console.log({ old: state.lastChecked, new: action.payload })
             return { ...state, lastChecked: action.payload }
+        }
+        case SETAMOUNTMINED: {
+            return { ...state, amountMined: action.payload }
         }
         default:
             return state
