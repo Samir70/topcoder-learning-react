@@ -27,10 +27,10 @@ export const setLastChecked = (isSet) => {
     }
 }
 
-export const SETAMOUNTMINED = "SETAMOUNTMINED"
-export const setAmountMined = (val) => {
-    return {
-        type: SETAMOUNTMINED,
-        payload: val
-    }
-}
+// export const SETAMOUNTMINED = "SETAMOUNTMINED"
+// export const setAmountMined = (val) => {
+//     return {
+//         type: SETAMOUNTMINED,
+//         payload: val
+//     }
+// }
