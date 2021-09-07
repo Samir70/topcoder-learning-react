@@ -24,7 +24,8 @@ export const counterReducer = (state = initialState, action) => {
                 ...state,
                 miningPlan: newPlan,
                 currentOre: nextOre,
-                finishedLastOre: noMoreOres
+                finishedLastOre: noMoreOres,
+                lastChecked: false
             }
         case SETLASTCHECKED: {
             console.log({old: state.lastChecked, new: action.payload})
